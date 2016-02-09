@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <errno.h>
+#include <stdarg.h>
 
 extern int errno;
 
@@ -42,11 +43,15 @@ void create_log_file( FILE **__fp_log,
     }
 }
 
-void logger::write_file(const char* _msg)
+void logger::write_file( const char* _msg, ... )
 {
+    va_list args;
+
+    va_start(args, _msg);
     if(NULL != __fp_log)    {
-        fprintf(__fp_log, _msg);
+        vfprintf(__fp_log, _msg, args);
     }
+    va_end(args);
 }
 
 logger* logger::getInstance()
