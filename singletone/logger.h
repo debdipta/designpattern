@@ -57,7 +57,9 @@ class logger
     //Constructor
     logger();
     static logger* __instance;
-    public:
+    logger& operator=(const logger &){};
+    logger(const logger &){};
+public:
     ~logger();
     void write_file( const char* ,... );
     static logger* getInstance();
