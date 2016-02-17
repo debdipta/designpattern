@@ -3,8 +3,6 @@
 
 #include <stdio.h>
 
-#define LOGMSG_SIZE 255
-
 enum    {
     L1,
     L2,
