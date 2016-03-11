@@ -21,7 +21,7 @@ public:
     void AddHandler(IHandler* hnext)
     {
         next =  hnext;
-    }one
+    }
 };
 
 #endif
