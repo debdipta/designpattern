@@ -11,14 +11,19 @@ using namespace std;
 class ListIterator : public Iterator
 {
     list<property*>::iterator it;
+    list<property*> money;
 public:
-    ListIterator(icollection* myproperty)
+    ListIterator( const list<property*> &mymoney)
     {
-        it = myproperty->mymoney.begin();
+        money = mymoney; 
+        it = money.begin();
     }
     bool hasNext()
     {
-        return true;    
+        printf("NUmber of elements= %d ...\n", money.size());
+        if(it != money.end())
+            return true;
+        return false;    
     }
     //Return net element
     property* next()
