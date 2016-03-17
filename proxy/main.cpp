@@ -19,5 +19,7 @@ int main(int argc, char* argv[])
     Browser* chrome= new Browser(13);
 
     firefox->getIPAddr("readcpp.com");
+    opera->getIPAddr("readcpp.com");
+    chrome->getIPAddr("readcpp.com");
     return 0;
 }

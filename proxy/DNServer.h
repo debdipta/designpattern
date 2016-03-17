@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <map>
-#include <arpa/inet.h>
 #include "MyServer.h"
 #include "common.h"
+#include <stdlib.h>
 
 using namespace std;
 
@@ -23,7 +23,6 @@ class LocalDNServer
 
     LocalDNServer()
     {
-
     }
     static LocalDNServer* ins;
 public:
@@ -32,25 +31,17 @@ public:
     }
     static LocalDNServer* getIns()
     {
-        if(NULL == ins)
-            return new LocalDNServer();
+        if(NULL == ins) 
+            ins = new LocalDNServer();
         return ins;
     }
     bool Register(const string& url, serverdetails* pServer)
     {
-        printf("Calling register\n");
-        table[url] = pServer;
-         printf("Map size = %d\n", table.size());
+        //table[url] = pServer;
+        table.insert(make_pair(url,pServer));// = pServer;
     }
     serverdetails* getServerObj(const string& url)
     {
-        printf("Map size = %d\n", table.size());
-        if(table.count(url) < 0)
-        {
-            printf("value doesn't exist...\n"); 
-            return NULL;
-        }
-        printf("url is %s\n", url.c_str());
         return table.find(url)->second;
     }
 };

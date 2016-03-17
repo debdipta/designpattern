@@ -12,8 +12,8 @@ class Controller
     static Controller* getIns()
     {
         if(NULL == obj)
-            return new Controller;
-        return new Controller;    
+            obj = new Controller;
+        return obj; 
     };
     void ProcessReq(int req)
     {

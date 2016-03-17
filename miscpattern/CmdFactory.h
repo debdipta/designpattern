@@ -11,7 +11,7 @@ public:
     static CmdFactory* getIns()
     {
         if(obj == NULL)
-            return new CmdFactory();
+            obj = new CmdFactory();
         return obj;
     }
     ICommand* getCmd(int val)
