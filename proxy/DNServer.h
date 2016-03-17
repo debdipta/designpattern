@@ -6,6 +6,7 @@
 #include "MyServer.h"
 #include "common.h"
 #include <stdlib.h>
+#include "IDNServer.h"
 
 using namespace std;
 
@@ -17,17 +18,23 @@ using namespace std;
  *  to connect to server from browser
  *
  * */
-class LocalDNServer
+class LocalDNServer : public IDNServer
 {
     map<string,serverdetails*> table;
-
+    IDNServer* next;
     LocalDNServer()
     {
+        next = NULL;
     }
     static LocalDNServer* ins;
 public:
     ~LocalDNServer()
     {
+        if(NULL != ins) {
+            delete ins;
+            ins = NULL;
+        }
+
     }
     static LocalDNServer* getIns()
     {
@@ -42,7 +49,13 @@ public:
     }
     serverdetails* getServerObj(const string& url)
     {
+        if((table.end() == table.find(url)) && (NULL != next))
+            return next->getServerObj(url);
         return table.find(url)->second;
+    }
+    void AddNextDNS(IDNServer* _next)
+    {
+        next = _next; 
     }
 };
 

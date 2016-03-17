@@ -20,7 +20,13 @@ public:
     int getIPAddr(const string& url)
     {
         //Start for ip from localhost
-        ((LocalDNServer::getIns()->getServerObj(url))->pServer)->request(GETTXTFILE, identity); 
+        serverdetails* server = LocalDNServer::getIns()->getServerObj(url);
+        if(NULL == server)
+        {       
+            printf("403 error: Server ip not found to connect...\n");
+            return 0;
+        };
+        server->pServer->request(GETTXTFILE, identity); 
     }
     int getid() {
         return identity;
